@@ -1,0 +1,23 @@
+{
+  "name": "brains-",
+  "version": "1.0.0",
+  "description": "binary search 3",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eminmirzoev/BRAINS-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eminmirzoev/BRAINS-/issues"
+  },
+  "homepage": "https://github.com/eminmirzoev/BRAINS-#readme",
+  "dependencies": {
+    "mocha": "6.2.2",
+    "chai": "4.2.0"
+  }
+}
