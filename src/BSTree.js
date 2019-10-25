@@ -60,4 +60,29 @@ function getSizeNode(node) {
     return result;
 }
 
+BSTree.prototype.toString = function() {
+    let str = '[';
+
+    str += toStringNode(this._root);
+    str += ']';
+
+    return str;
+}
+
+function toStringNode(node) {
+    let str = '';
+
+    if (!node) {
+        return '';
+    }
+
+    str += toStringNode(node.left);
+    node.left && (str += ', ');
+    str += `${node.value}`;
+    node.right && (str += ', ');
+    str += toStringNode(node.right);
+    
+    return str;
+};
+
 module.exports = BSTree;
