@@ -21,7 +21,7 @@ BSTree.prototype.init = function(array) {
 }
 
 BSTree.prototype.add = function(value) {
-    if (!value && value !== 0) {
+    if (!value   && value !== 0) {
         return;
     }
 
@@ -84,5 +84,44 @@ function toStringNode(node) {
     
     return str;
 };
+
+BSTree.prototype.delete = function(value) {
+    if(!value && value !== 0) {
+        return;
+    }
+
+    this._root = deleteNode(value, this._root);
+};
+
+function deleteNode(value, node) {
+    if(!node) {
+        return node;
+    }
+
+    if(value > node.value) {
+        node.right = deleteNode(value, node.right);
+    } else if (value < node.value) {
+        node.left = deleteNode(value, node.left);
+    } else if (value === node.value) {
+        if (!node.left && !node.right) {
+            return null;
+        } else if (!node.right) {
+            return node.left;
+        } else if (!node.left) {
+            return node.right;
+        } else {
+            let tempLeft = node.left;
+            let tempRight = node.right;
+
+            while (tempRight.left) {
+                tempRight = tempRight.left;
+            }
+
+            tempRight.left = tempLeft;
+            
+            return node.right;
+        }
+    }
+}
 
 module.exports = BSTree;
