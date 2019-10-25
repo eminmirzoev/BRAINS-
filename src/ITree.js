@@ -2,7 +2,7 @@ function ITree() {};
 
 ITree.prototype.init = function(array) { console.log('ITree.init'); }
 ITree.prototype.clear = function() { console.log('ITree.clear'); }
-ITree.prototype.getSize() = function(array) { console.log('ITree.getSize'); }
+ITree.prototype.getSize = function(array) { console.log('ITree.getSize'); }
 ITree.prototype.toArray = function() { console.log('ITree.toArray'); }
 ITree.prototype.toString = function() { console.log('ITree.toString'); }
 ITree.prototype.add = function(value) { console.log('ITree.add'); }
