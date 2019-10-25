@@ -75,7 +75,7 @@ function toStringNode(node) {
     if (!node) {
         return '';
     }
-
+    
     str += toStringNode(node.left);
     node.left && (str += ', ');
     str += `${node.value}`;
@@ -122,6 +122,35 @@ function deleteNode(value, node) {
             return node.right;
         }
     }
+}
+
+// getLeaves() - возвращает количество “листьев” дерева (узлов с пустыми связями left и right). 
+// Принимает ничего, возвращает целое число.
+
+
+BSTree.prototype.getLeaves = function() {
+    const count = 0;
+
+    count = getLeavesNode(node);
+
+    return count;
+}
+
+
+function getLeavesNode(node) {
+    let count = 0;
+
+    if (!node) {
+        count = 0;
+    }
+    else if (!node.left && !node.right) {
+        count = 1;
+    }
+    else if (node.left && node.right) {
+        count += 1;
+    }
+    
+    return count;
 }
 
 module.exports = BSTree;
