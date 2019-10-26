@@ -122,14 +122,12 @@ function deleteNode(value, node) {
             return node.right;
         }
     }
+
+    return node;
 }
 
 BSTree.prototype.getHeight = function() {
-    let height = 0;
-
-    height = getHeightNode(this._root);
-
-    return height;
+    return getHeightNode(this._root);
 }
 
 function getHeightNode(node) {
@@ -142,12 +140,6 @@ function getHeightNode(node) {
     const leftHeight = getHeightNode(node.left);
     const rightHeight = getHeightNode(node.right);
     height++;
-
-    // if (leftHeight > rightHeight) {
-    //     height += leftHeight;
-    // } else {
-    //     height += rightHeight;
-    // }
 
     height += leftHeight > rightHeight ? leftHeight : rightHeight;
 
