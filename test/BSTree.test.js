@@ -260,3 +260,62 @@ describe('BSTree.getHeight', () => {
         assert.deepEqual(actual, expected);
     });
 });
+
+describe('BSTree.reverse', () => {
+    let tree = null;
+
+    beforeEach(() => {
+        tree = new BSTree();
+    });
+
+    it('should reverse tree (undefined)', () => {
+        const arr = undefined;
+        const expectedString = '[]';
+        tree.init(arr);
+
+        tree.reverse();
+
+        assert.deepEqual(tree.toString(), expectedString);
+    });
+
+    it('should reverse tree ([])', () => {
+        const arr = undefined;
+        const expectedString = '[]';
+        tree.init(arr);
+
+        tree.reverse();
+
+        assert.deepEqual(tree.toString(), expectedString);
+    });
+
+    it('should reverse tree ([1])', () => {
+        const arr = [1];
+        const expectedString = '[1]';
+        tree.init(arr);
+
+        tree.reverse();
+
+        assert.deepEqual(tree.toString(), expectedString);
+    });
+
+    it('should reverse tree ([1, 2])', () => {
+        const arr = [1, 2];
+        const expectedString = '[2, 1]';
+        tree.init(arr);
+
+        tree.reverse();
+
+        assert.deepEqual(tree.toString(), expectedString);
+    });
+
+    it('should reverse tree ([4, 3, -1, 0, 7, 100])', () => {
+        const arr = [4, 3, -1, 0, 7, 100];
+        const expectedString = '[100, 7, 4, 3, 0, -1]';
+        tree.init(arr);
+
+        tree.reverse();
+
+        assert.deepEqual(tree.toString(), expectedString);
+    });
+});
+    

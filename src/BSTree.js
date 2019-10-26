@@ -146,4 +146,24 @@ function getHeightNode(node) {
     return height;
 }
 
+
+BSTree.prototype.reverse = function() {
+    this._root = reverseNode(this._root);
+}
+
+function reverseNode(node) {
+    if (!node) {
+        return null;
+    } 
+
+    const leftNode = node.left;
+
+    node.left = node.right; 
+    node.right = leftNode; 
+   
+    node.left = reverseNode(node.left);
+    node.right = reverseNode(node.right);
+
+    return node;
+}
 module.exports = BSTree;
