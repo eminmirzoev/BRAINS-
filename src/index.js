@@ -6,5 +6,5 @@ tree.init(arr);
 
 // const str = tree.toString();
 // const del = tree.delete();
-const leaves = tree.getLeaves();
-console.log(leaves);
+// const leaves = tree.getLeaves();
+// console.log(leaves);

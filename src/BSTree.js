@@ -25,7 +25,7 @@ BSTree.prototype.add = function(value) {
         return;
     }
 
-    this._root = addNode(this._root, value);    
+    this._root = addNode(this._root, value);
 }
 
 function addNode(node, value) {
@@ -101,7 +101,7 @@ function toStringNode(node) {
     str += `${node.value}`;
     node.right && (str += ', ');
     str += toStringNode(node.right);
-    
+
     return str;
 };
 
@@ -138,15 +138,62 @@ function deleteNode(value, node) {
             }
 
             tempRight.left = tempLeft;
-            
+
             return node.right;
         }
     }
+
+    return node;
+};
+
+BSTree.prototype.getHeight = function() {
+    return getHeightNode(this._root);
 }
 
-// getLeaves() - возвращает количество “листьев” дерева (узлов с пустыми связями left и right). 
-// Принимает ничего, возвращает целое число.
+function getHeightNode(node) {
+    let height = 0;
 
+    if (!node) {
+        return 0;
+    }
+    
+    const leftHeight = getHeightNode(node.left);
+    const rightHeight = getHeightNode(node.right);
+    height++;
+
+    height += leftHeight > rightHeight ? leftHeight : rightHeight;
+
+    return height;
+}
+
+BSTree.prototype.getWidth = function() {
+    let levels = []; 
+    let maxEl = 0;
+                                    //начальный уровень       
+    levels = getWidthNode(this._root, 0, levels); //levels - кол-во узлов на уровнях
+    
+    for(let i = 0; i < levels.length; i++) {
+        if (levels[i] > maxEl) {
+            maxEl = levels[i];
+        } 
+    }
+
+    return maxEl;
+}
+
+function getWidthNode(node, currentLevel, levels) {
+    if (!node) {
+        return levels; 
+    }   
+
+    !levels[currentLevel] && (levels[currentLevel] = 0);
+
+    levels = getWidthNode(node.left, currentLevel + 1, levels);
+    levels[currentLevel] += 1;
+    levels = getWidthNode(node.right, currentLevel + 1, levels);
+
+    return levels; 
+}
 
 BSTree.prototype.getLeaves = function() {
     size =  getLeavesNode(this._root);
