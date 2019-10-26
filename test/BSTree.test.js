@@ -109,7 +109,7 @@ describe('BSTree.toString', () => {
         const expected = '[1, 2]';
         tree.init(arr);
 
-        const actual = tree.getSize();
+        const actual = tree.toString();
 
         assert.deepEqual(actual, expected);
     });
@@ -120,6 +120,142 @@ describe('BSTree.toString', () => {
         tree.init(arr);
 
         const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
+    });
+});
+
+describe('BSTree.getHeight', () => {
+    let tree = null;
+
+    beforeEach(() => {
+        tree = new BSTree();
+    });
+
+    it('should return height(undefined)', () => {
+        const arr = undefined;
+        const expected = 0;
+        tree.init(arr);
+
+        const actual = tree.getHeight();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return height ([])', () => {
+        const arr = [];
+        const expected = 0;
+        tree.init(arr);
+
+        const actual = tree.getHeight();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return height(1)', () => {
+        const arr = [1];
+        const expected = 1;
+        tree.init(arr);
+
+        const actual = tree.getHeight();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return height(2, 1)', () => {
+        const arr = [2, 1];
+        const expected = 2;
+        tree.init(arr);
+
+        const actual = tree.getHeight();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return height([1, 2, 0, -8, 21])', () => {
+        const arr = [1, 2, 0, -8, 21];
+        const expected = 3;
+        tree.init(arr);
+
+        const actual = tree.getHeight();
+
+        assert.deepEqual(actual, expected);
+    });
+
+    it('should return height([1, 2, 0, -8, 21, 12, -5, 9])', () => {
+        const arr = [1, 2, 0, -8, 21, 12, -5, 9];
+        const expected = 5;
+        tree.init(arr);
+
+        const actual = tree.getHeight();
+
+        assert.deepEqual(actual, expected);
+    });
+});
+
+describe('BSTree.getHeight', () => {
+    let tree = null;
+
+    beforeEach(() => {
+        tree = new BSTree();
+    });
+
+    it('should return height(undefined)', () => {
+        const arr = undefined;
+        const expected = 0;
+        tree.init(arr);
+
+        const actual = tree.getHeight();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return height ([])', () => {
+        const arr = [];
+        const expected = 0;
+        tree.init(arr);
+
+        const actual = tree.getHeight();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return height(1)', () => {
+        const arr = [1];
+        const expected = 1;
+        tree.init(arr);
+
+        const actual = tree.getHeight();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return height(2, 1)', () => {
+        const arr = [2, 1];
+        const expected = 2;
+        tree.init(arr);
+
+        const actual = tree.getHeight();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return height([1, 2, 0, -8, 21])', () => {
+        const arr = [1, 2, 0, -8, 21];
+        const expected = 3;
+        tree.init(arr);
+
+        const actual = tree.getHeight();
+
+        assert.deepEqual(actual, expected);
+    });
+
+    it('should return height([1, 2, 0, -8, 21, 12, -5, 9])', () => {
+        const arr = [1, 2, 0, -8, 21, 12, -5, 9];
+        const expected = 5;
+        tree.init(arr);
+
+        const actual = tree.getHeight();
 
         assert.deepEqual(actual, expected);
     });
