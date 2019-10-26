@@ -10,7 +10,7 @@ function BSTree() {
 BSTree.prototype = Object.create(ITree.prototype);
 BSTree.prototype.constructor = BSTree;
 
-BSTree.prototype.init = function(array) {
+BSTree.prototype.init = function (array) {
     this.clear();
 
     if (Array.isArray(array)) {
@@ -20,8 +20,8 @@ BSTree.prototype.init = function(array) {
     }
 }
 
-BSTree.prototype.add = function(value) {
-    if (!value   && value !== 0) {
+BSTree.prototype.add = function (value) {
+    if (!value && value !== 0) {
         return;
     }
 
@@ -40,11 +40,11 @@ function addNode(node, value) {
     return node;
 }
 
-BSTree.prototype.clear = function() {
+BSTree.prototype.clear = function () {
     this._root = null;
 }
 
-BSTree.prototype.getSize = function() {
+BSTree.prototype.getSize = function () {
     return getSizeNode(this._root);
 }
 
@@ -60,7 +60,7 @@ function getSizeNode(node) {
     return result;
 }
 
-BSTree.prototype.getHeight = function() {
+BSTree.prototype.getHeight = function () {
     return getHeightNode(this._root);
 }
 
@@ -70,7 +70,7 @@ function getHeightNode(node) {
     if (!node) {
         return 0;
     }
-    
+
     const leftHeight = getHeightNode(node.left);
     const rightHeight = getHeightNode(node.right);
     height++;
@@ -80,7 +80,7 @@ function getHeightNode(node) {
     return height;
 }
 
-BSTree.prototype.toString = function() {
+BSTree.prototype.toString = function () {
     let str = '[';
 
     str += toStringNode(this._root);
@@ -95,7 +95,7 @@ function toStringNode(node) {
     if (!node) {
         return '';
     }
-    
+
     str += toStringNode(node.left);
     node.left && (str += ', ');
     str += `${node.value}`;
@@ -105,8 +105,8 @@ function toStringNode(node) {
     return str;
 };
 
-BSTree.prototype.delete = function(value) {
-    if(!value && value !== 0) {
+BSTree.prototype.delete = function (value) {
+    if (!value && value !== 0) {
         return;
     }
 
@@ -114,11 +114,11 @@ BSTree.prototype.delete = function(value) {
 };
 
 function deleteNode(value, node) {
-    if(!node) {
+    if (!node) {
         return node;
     }
 
-    if(value > node.value) {
+    if (value > node.value) {
         node.right = deleteNode(value, node.right);
     } else if (value < node.value) {
         node.left = deleteNode(value, node.left);
@@ -146,7 +146,7 @@ function deleteNode(value, node) {
     return node;
 };
 
-BSTree.prototype.getHeight = function() {
+BSTree.prototype.getHeight = function () {
     return getHeightNode(this._root);
 }
 
@@ -156,7 +156,7 @@ function getHeightNode(node) {
     if (!node) {
         return 0;
     }
-    
+
     const leftHeight = getHeightNode(node.left);
     const rightHeight = getHeightNode(node.right);
     height++;
@@ -166,16 +166,16 @@ function getHeightNode(node) {
     return height;
 }
 
-BSTree.prototype.getWidth = function() {
-    let levels = []; 
+BSTree.prototype.getWidth = function () {
+    let levels = [];
     let maxEl = 0;
-                                    //начальный уровень       
+    //начальный уровень       
     levels = getWidthNode(this._root, 0, levels); //levels - кол-во узлов на уровнях
-    
-    for(let i = 0; i < levels.length; i++) {
+
+    for (let i = 0; i < levels.length; i++) {
         if (levels[i] > maxEl) {
             maxEl = levels[i];
-        } 
+        }
     }
 
     return maxEl;
@@ -183,8 +183,8 @@ BSTree.prototype.getWidth = function() {
 
 function getWidthNode(node, currentLevel, levels) {
     if (!node) {
-        return levels; 
-    }   
+        return levels;
+    }
 
     !levels[currentLevel] && (levels[currentLevel] = 0);
 
@@ -192,15 +192,14 @@ function getWidthNode(node, currentLevel, levels) {
     levels[currentLevel] += 1;
     levels = getWidthNode(node.right, currentLevel + 1, levels);
 
-    return levels; 
+    return levels;
 }
 
-BSTree.prototype.getLeaves = function() {
-    size =  getLeavesNode(this._root);
+BSTree.prototype.getLeaves = function () {
+    size = getLeavesNode(this._root);
 
     return size;
 }
-
 
 function getLeavesNode(node) {
     let size = 0;
@@ -208,35 +207,57 @@ function getLeavesNode(node) {
     if (!node) {
         return size;
     }
-    
+
     node.left && (size += getLeavesNode(node.left));
     node.right && (size += getLeavesNode(node.right));
 
     if (!node.left && !node.right) {
         size++;
     }
-    
+
     return size;
 }
 
-BSTree.prototype.reverse = function() {
+BSTree.prototype.reverse = function () {
     this._root = reverseNode(this._root);
 }
 
 function reverseNode(node) {
     if (!node) {
         return null;
-    } 
+    }
 
     const leftNode = node.left;
 
-    node.left = node.right; 
-    node.right = leftNode; 
-   
+    node.left = node.right;
+    node.right = leftNode;
+
     node.left = reverseNode(node.left);
     node.right = reverseNode(node.right);
 
     return node;
+}
+
+BSTree.prototype.toArray = function () {
+    return toArrayNode(this._root);
+}
+
+function toArrayNode(node) {
+    let array = [];
+    let arr = [];
+
+    if (!node) {
+        return array;
+    }
+
+    node.left && (array = toArrayNode(node.left));
+    array[array.length] = node.value;
+    node.right && (arr = toArrayNode(node.right));
+    for (let i = 0; i < arr.length; i++) {
+        array[array.length] = arr[i];
+    }
+
+    return array;
 }
 
 module.exports = BSTree;
