@@ -146,4 +146,34 @@ function getHeightNode(node) {
     return height;
 }
 
+BSTree.prototype.getWidth = function() {
+    let levels = []; 
+    let maxEl = 0;
+                                    //начальный уровень       
+    levels = getWidthNode(this._root, 0, levels); //levels - кол-во узлов на уровнях
+    
+    for(let i = 0; i < levels.length; i++) {
+        if (levels[i] > maxEl) {
+            maxEl = levels[i];
+        } 
+    }
+
+    return maxEl;
+}
+
+function getWidthNode(node, currentLevel, levels) {
+    if (!node) {
+        return levels; 
+    }   
+
+    !levels[currentLevel] && (levels[currentLevel] = 0);
+
+    levels = getWidthNode(node.left, currentLevel + 1, levels);
+    levels[currentLevel] += 1;
+    levels = getWidthNode(node.right, currentLevel + 1, levels);
+
+    return levels; 
+}
+
+
 module.exports = BSTree;
