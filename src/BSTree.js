@@ -124,7 +124,7 @@ function deleteNode(value, node) {
     }
 
     return node;
-}
+};
 
 BSTree.prototype.getHeight = function() {
     return getHeightNode(this._root);
