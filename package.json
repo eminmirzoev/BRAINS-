@@ -19,5 +19,8 @@
   "dependencies": {
     "mocha": "6.2.2",
     "chai": "4.2.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }
