@@ -25,7 +25,7 @@ BSTree.prototype.add = function(value) {
         return;
     }
 
-    this._root = addNode(this._root, value);    
+    this._root = addNode(this._root, value);
 }
 
 function addNode(node, value) {
@@ -81,7 +81,7 @@ function toStringNode(node) {
     str += `${node.value}`;
     node.right && (str += ', ');
     str += toStringNode(node.right);
-    
+
     return str;
 };
 
@@ -118,12 +118,32 @@ function deleteNode(value, node) {
             }
 
             tempRight.left = tempLeft;
-            
+
             return node.right;
         }
     }
 
     return node;
+};
+
+BSTree.prototype.getHeight = function() {
+    return getHeightNode(this._root);
+}
+
+function getHeightNode(node) {
+    let height = 0;
+
+    if (!node) {
+        return 0;
+    }
+    
+    const leftHeight = getHeightNode(node.left);
+    const rightHeight = getHeightNode(node.right);
+    height++;
+
+    height += leftHeight > rightHeight ? leftHeight : rightHeight;
+
+    return height;
 }
 
 module.exports = BSTree;
