@@ -122,6 +122,8 @@ function deleteNode(value, node) {
             return node.right;
         }
     }
+
+    return node;
 }
 
 module.exports = BSTree;

@@ -109,7 +109,7 @@ describe('BSTree.toString', () => {
         const expected = '[1, 2]';
         tree.init(arr);
 
-        const actual = tree.getSize();
+        const actual = tree.toString();
 
         assert.deepEqual(actual, expected);
     });
@@ -118,6 +118,110 @@ describe('BSTree.toString', () => {
         const arr = [1, 2, 0, -8, 21];
         const expected = '[-8, 0, 1, 2, 21]';
         tree.init(arr);
+
+        const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
+    });
+});
+
+describe('BSTree.delete', () => {
+    let tree = null;
+
+    beforeEach(() => {
+        tree = new BSTree();
+    });
+
+    it('should return [] (55)', () => {
+        const arr = undefined;
+        const val = 55;
+        const expected = '[]';
+        tree.init(arr);
+        tree.delete(val);
+
+        const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return [] (55)', () => {
+        const arr = [];
+        const val = 55;
+        const expected = '[]';
+        tree.init(arr);
+        tree.delete(val);
+
+        const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return [1] (55)', () => {
+        const arr = [1];
+        const val = 55;
+        const expected = '[1]';
+        tree.init(arr);
+        tree.delete(val);
+
+        const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return [1, 2] (55)', () => {
+        const arr = [2, 1];
+        const val = 55;
+        const expected = '[1, 2]';
+        tree.init(arr);
+        tree.delete(val);        
+
+        const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return [-8, 0, 1, 2] (21)', () => {
+        const arr = [1, 2, 0, -8, 21];
+        const val = 21;
+        const expected = '[-8, 0, 1, 2]';
+        tree.init(arr);
+        tree.delete(val);
+
+        const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
+    });
+
+    it('should return [40, 50, 60, 70] (55)', () => {
+        const arr = [40, 50, 55, 60, 70];
+        const val = 55;
+        const expected = '[40, 50, 60, 70]';
+        tree.init(arr);
+        tree.delete(val);
+
+        const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
+    });
+
+    it('should return [40, 50, 55, 60] (70)', () => {
+        const arr = [40, 50, 55, 60, 70];
+        const val = 70;
+        const expected = '[40, 50, 55, 60]';
+        tree.init(arr);
+        tree.delete(val);
+
+        const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
+    });
+
+    it('should return [40, 50, 55, 60, 74, 76, 80, 90] (75)', () => {
+        const arr = [50, 40, 70, 55, 75, 60, 90, 74, 76, 80];
+        const val = 75;
+        const expected = '[40, 50, 55, 60, 70, 74, 76, 80, 90]';
+        tree.init(arr);
+        tree.delete(val);
 
         const actual = tree.toString();
 
