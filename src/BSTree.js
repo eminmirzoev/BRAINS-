@@ -60,6 +60,26 @@ function getSizeNode(node) {
     return result;
 }
 
+BSTree.prototype.getHeight = function() {
+    return getHeightNode(this._root);
+}
+
+function getHeightNode(node) {
+    let height = 0;
+
+    if (!node) {
+        return 0;
+    }
+    
+    const leftHeight = getHeightNode(node.left);
+    const rightHeight = getHeightNode(node.right);
+    height++;
+
+    height += leftHeight > rightHeight ? leftHeight : rightHeight;
+
+    return height;
+}
+
 BSTree.prototype.toString = function() {
     let str = '[';
 
@@ -75,7 +95,7 @@ function toStringNode(node) {
     if (!node) {
         return '';
     }
-
+    
     str += toStringNode(node.left);
     node.left && (str += ', ');
     str += `${node.value}`;
@@ -175,5 +195,28 @@ function getWidthNode(node, currentLevel, levels) {
     return levels; 
 }
 
+BSTree.prototype.getLeaves = function() {
+    size =  getLeavesNode(this._root);
+
+    return size;
+}
+
+
+function getLeavesNode(node) {
+    let size = 0;
+
+    if (!node) {
+        return size;
+    }
+    
+    node.left && (size += getLeavesNode(node.left));
+    node.right && (size += getLeavesNode(node.right));
+
+    if (!node.left && !node.right) {
+        size++;
+    }
+    
+    return size;
+}
 
 module.exports = BSTree;

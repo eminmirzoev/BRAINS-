@@ -346,3 +346,61 @@ describe('BSTree.getWidth', () => {
         assert.deepEqual(actual, expected);
     });
 });
+
+describe('BSTree.getLeaves', () => {
+    let tree = null;
+
+    beforeEach(() => {
+        tree = new BSTree();
+    });
+
+    it('should return 0 (undefined)', () => {
+        const arr = undefined;
+        const expected = 0;
+        tree.init(arr);
+
+        const actual = tree.getLeaves();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return 0 ([])', () => {
+        const arr = [];
+        const expected = 0;
+        tree.init(arr);
+
+        const actual = tree.getLeaves();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return 2 ([1])', () => {
+        const arr = [1];
+        const expected = 1;
+        tree.init(arr);
+
+        const actual = tree.getLeaves();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return 3 ([2, 1])', () => {
+        const arr = [2, 1];
+        const expected = 1;
+        tree.init(arr);
+
+        const actual = tree.getLeaves();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return  ([1, 2, 0, -8, 21])', () => {
+        const arr = [1, 2, 0, -8, 21];
+        const expected = 2;
+        tree.init(arr);
+
+        const actual = tree.getLeaves();
+
+        assert.deepEqual(actual, expected);
+    });
+});
