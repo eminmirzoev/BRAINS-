@@ -253,4 +253,25 @@ function toArrayNode(node) {
     return [...left, node.value, ...right];
 }
 
+BSTree.prototype.getNodes = function() {
+    return getNodesNode(this._root);
+}
+
+function getNodesNode(node) {
+    let size = 0;
+
+    if (!node) {
+        return size;
+    }
+
+    node.left && (size += getNodesNode(node.left));
+    node.right && (size += getNodesNode(node.right));
+
+    if (node.left || node.right) {
+        size++;
+    }
+
+    return size;
+}
+
 module.exports = BSTree;
