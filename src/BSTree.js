@@ -10,7 +10,7 @@ function BSTree() {
 BSTree.prototype = Object.create(ITree.prototype);
 BSTree.prototype.constructor = BSTree;
 
-BSTree.prototype.init = function (array) {
+BSTree.prototype.init = function(array) {
     this.clear();
 
     if (Array.isArray(array)) {
@@ -20,7 +20,7 @@ BSTree.prototype.init = function (array) {
     }
 }
 
-BSTree.prototype.add = function (value) {
+BSTree.prototype.add = function(value) {
     if (!value && value !== 0) {
         return;
     }
@@ -40,11 +40,11 @@ function addNode(node, value) {
     return node;
 }
 
-BSTree.prototype.clear = function () {
+BSTree.prototype.clear = function() {
     this._root = null;
 }
 
-BSTree.prototype.getSize = function () {
+BSTree.prototype.getSize = function() {
     return getSizeNode(this._root);
 }
 
@@ -60,7 +60,7 @@ function getSizeNode(node) {
     return result;
 }
 
-BSTree.prototype.getHeight = function () {
+BSTree.prototype.getHeight = function() {
     return getHeightNode(this._root);
 }
 
@@ -80,7 +80,7 @@ function getHeightNode(node) {
     return height;
 }
 
-BSTree.prototype.toString = function () {
+BSTree.prototype.toString = function() {
     let str = '[';
 
     str += toStringNode(this._root);
@@ -105,7 +105,7 @@ function toStringNode(node) {
     return str;
 };
 
-BSTree.prototype.delete = function (value) {
+BSTree.prototype.delete = function(value) {
     if (!value && value !== 0) {
         return;
     }
@@ -146,7 +146,7 @@ function deleteNode(value, node) {
     return node;
 };
 
-BSTree.prototype.getHeight = function () {
+BSTree.prototype.getHeight = function() {
     return getHeightNode(this._root);
 }
 
@@ -166,7 +166,7 @@ function getHeightNode(node) {
     return height;
 }
 
-BSTree.prototype.getWidth = function () {
+BSTree.prototype.getWidth = function() {
     let levels = [];
     let maxEl = 0;
     //начальный уровень       
@@ -195,7 +195,7 @@ function getWidthNode(node, currentLevel, levels) {
     return levels;
 }
 
-BSTree.prototype.getLeaves = function () {
+BSTree.prototype.getLeaves = function() {
     size = getLeavesNode(this._root);
 
     return size;
@@ -218,7 +218,7 @@ function getLeavesNode(node) {
     return size;
 }
 
-BSTree.prototype.reverse = function () {
+BSTree.prototype.reverse = function() {
     this._root = reverseNode(this._root);
 }
 
@@ -238,26 +238,19 @@ function reverseNode(node) {
     return node;
 }
 
-BSTree.prototype.toArray = function () {
+BSTree.prototype.toArray = function() {
     return toArrayNode(this._root);
 }
 
 function toArrayNode(node) {
-    let array = [];
-    let arr = [];
-
     if (!node) {
-        return array;
+        return [];
     }
 
-    node.left && (array = toArrayNode(node.left));
-    array[array.length] = node.value;
-    node.right && (arr = toArrayNode(node.right));
-    for (let i = 0; i < arr.length; i++) {
-        array[array.length] = arr[i];
-    }
+    const left = toArrayNode(node.left);
+    const right = toArrayNode(node.right);
 
-    return array;
+    return [...left, node.value, ...right];
 }
 
 module.exports = BSTree;
