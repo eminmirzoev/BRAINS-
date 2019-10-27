@@ -33,10 +33,16 @@ function addNode(node, value) {
         return new Node(value);
     } else if (value < node.value) {
         node.left = addNode(node.left, value);
+        fixCurrentHeight(node.left);
+        node.left = balance(node.left);
     } else {
         node.right = addNode(node.right, value);
+        fixCurrentHeight(node.right);
+        node.right = balance(node.right);
     }
 
+    fixCurrentHeight(node);
+    
     return node;
 }
 
@@ -111,6 +117,7 @@ BSTree.prototype.delete = function(value) {
     }
 
     this._root = deleteNode(value, this._root);
+    this._root = balanceNode(this._root);
 };
 
 function deleteNode(value, node) {
@@ -251,6 +258,78 @@ function toArrayNode(node) {
     const right = toArrayNode(node.right);
 
     return [...left, node.value, ...right];
+}
+
+function fixCurrentHeight(node) {
+    const leftHeight = node.left ? node.left.height : 0;
+    const rightHeight = node.right ? node.right.height : 0;
+    
+    node.height = 0;
+    node.height++;
+
+    node.height += leftHeight > rightHeight ? leftHeight : rightHeight;
+}
+
+function rotateRight(node) {
+    let tempNode = node.left;
+    node.left = tempNode.right;
+    tempNode.right = node;
+    fixCurrentHeight(node);
+    fixCurrentHeight(tempNode);
+
+    return tempNode;
+}
+
+function rotateLeft(node) {
+    let tempNode = node.right;
+    node.right = tempNode.left;
+    tempNode.left = node;
+    fixCurrentHeight(tempNode);
+    fixCurrentHeight(node);
+
+    return tempNode;
+}
+
+function balance(node) {
+    if (!node) {
+        return node;
+    }
+
+    const bFactor = node.getBfactor();
+
+    if (bFactor > 1) {
+        if(node.right.getBfactor() < 0) {
+            node.right = rotateRight(node.right);
+        }
+
+        return rotateLeft(node);
+    } else if (bFactor < -1) {
+        if(node.left.getBfactor() > 0) {
+            node.left = rotateLeft(node.left);
+        }
+
+        return rotateRight(node);
+    }
+
+    return node;
+}
+
+function balanceNode(node) {
+    if (!node) {
+        return node;
+    }
+
+    node.left = balanceNode(node.left);
+    node.right = balanceNode(node.right);
+    fixCurrentHeight(node);
+
+    const bFactor = node.getBfactor();
+
+    if (bFactor < -1 || bFactor > 1) {
+        node = balance(node);
+    };
+
+    return node;
 }
 
 module.exports = BSTree;
