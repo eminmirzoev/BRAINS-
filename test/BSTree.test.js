@@ -126,6 +126,12 @@ describe('BSTree.toString', () => {
 });
 
 describe('BSTree.delete', () => {
+    let tree = null;
+
+    beforeEach(() => {
+        tree = new BSTree();
+    });
+
     it('should return [] (55)', () => {
         const arr = undefined;
         const val = 55;
@@ -134,6 +140,8 @@ describe('BSTree.delete', () => {
         tree.delete(val);
 
         const actual = tree.toString();
+        
+        assert.deepEqual(actual, expected);
     });
 
     it('should return [] (55)', () => {
@@ -144,6 +152,8 @@ describe('BSTree.delete', () => {
         tree.delete(val);
 
         const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
     });
 
     it('should return [1] (55)', () => {
@@ -154,6 +164,8 @@ describe('BSTree.delete', () => {
         tree.delete(val);
 
         const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
     });
 
     it('should return [1, 2] (55)', () => {
@@ -164,6 +176,8 @@ describe('BSTree.delete', () => {
         tree.delete(val);        
 
         const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
     });
 
     it('should return [-8, 0, 1, 2] (21)', () => {
@@ -174,6 +188,8 @@ describe('BSTree.delete', () => {
         tree.delete(val);
 
         const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
     });
 
     it('should return [40, 50, 60, 70] (55)', () => {
@@ -196,6 +212,8 @@ describe('BSTree.delete', () => {
         tree.delete(val);
 
         const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
     });
     
     it('should return [40, 50, 55, 60, 74, 76, 80, 90] (75)', () => {
@@ -206,6 +224,8 @@ describe('BSTree.delete', () => {
         tree.delete(val);
 
         const actual = tree.toString();
+
+        assert.deepEqual(actual, expected);
     });
 });
 
@@ -458,6 +478,64 @@ describe('BSTree.getLeaves', () => {
         tree.init(arr);
 
         const actual = tree.getLeaves();
+
+        assert.deepEqual(actual, expected);
+    });
+});
+
+describe('BSTree.toArray', () => {
+    let tree = null;
+
+    beforeEach(() => {
+        tree = new BSTree();
+    });
+
+    it('should return correct array (undefined)', () => {
+        const arr = undefined;
+        const expected = [];
+        tree.init(arr);
+
+        const actual = tree.toArray();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return array ([])', () => {
+        const arr = [];
+        const expected = [];
+        tree.init(arr);
+
+        const actual = tree.toArray();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return correct array ([1])', () => {
+        const arr = [1];
+        const expected = [1];
+        tree.init(arr);
+
+        const actual = tree.toArray();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return correct array ([2, 1])', () => {
+        const arr = [2, 1];
+        const expected = [1, 2];
+        tree.init(arr);
+
+        const actual = tree.toArray();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return correct array ([1, 2, 0, -8, 21])', () => {
+        const arr = [1, 2, 0, -8, 21];
+        const expected = [-8, 0, 1, 2, 21];
+        tree.init(arr);
+
+        const actual = tree.toArray();
 
         assert.deepEqual(actual, expected);
     });

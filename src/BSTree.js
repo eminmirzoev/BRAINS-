@@ -21,7 +21,7 @@ BSTree.prototype.init = function(array) {
 }
 
 BSTree.prototype.add = function(value) {
-    if (!value   && value !== 0) {
+    if (!value && value !== 0) {
         return;
     }
 
@@ -70,7 +70,7 @@ function getHeightNode(node) {
     if (!node) {
         return 0;
     }
-    
+
     const leftHeight = getHeightNode(node.left);
     const rightHeight = getHeightNode(node.right);
     height++;
@@ -95,7 +95,7 @@ function toStringNode(node) {
     if (!node) {
         return '';
     }
-    
+
     str += toStringNode(node.left);
     node.left && (str += ', ');
     str += `${node.value}`;
@@ -106,7 +106,7 @@ function toStringNode(node) {
 };
 
 BSTree.prototype.delete = function(value) {
-    if(!value && value !== 0) {
+    if (!value && value !== 0) {
         return;
     }
 
@@ -114,11 +114,11 @@ BSTree.prototype.delete = function(value) {
 };
 
 function deleteNode(value, node) {
-    if(!node) {
+    if (!node) {
         return node;
     }
 
-    if(value > node.value) {
+    if (value > node.value) {
         node.right = deleteNode(value, node.right);
     } else if (value < node.value) {
         node.left = deleteNode(value, node.left);
@@ -156,7 +156,7 @@ function getHeightNode(node) {
     if (!node) {
         return 0;
     }
-    
+
     const leftHeight = getHeightNode(node.left);
     const rightHeight = getHeightNode(node.right);
     height++;
@@ -167,15 +167,15 @@ function getHeightNode(node) {
 }
 
 BSTree.prototype.getWidth = function() {
-    let levels = []; 
+    let levels = [];
     let maxEl = 0;
-                                    //начальный уровень       
+    //начальный уровень       
     levels = getWidthNode(this._root, 0, levels); //levels - кол-во узлов на уровнях
-    
-    for(let i = 0; i < levels.length; i++) {
+
+    for (let i = 0; i < levels.length; i++) {
         if (levels[i] > maxEl) {
             maxEl = levels[i];
-        } 
+        }
     }
 
     return maxEl;
@@ -183,8 +183,8 @@ BSTree.prototype.getWidth = function() {
 
 function getWidthNode(node, currentLevel, levels) {
     if (!node) {
-        return levels; 
-    }   
+        return levels;
+    }
 
     !levels[currentLevel] && (levels[currentLevel] = 0);
 
@@ -192,15 +192,14 @@ function getWidthNode(node, currentLevel, levels) {
     levels[currentLevel] += 1;
     levels = getWidthNode(node.right, currentLevel + 1, levels);
 
-    return levels; 
+    return levels;
 }
 
 BSTree.prototype.getLeaves = function() {
-    size =  getLeavesNode(this._root);
+    size = getLeavesNode(this._root);
 
     return size;
 }
-
 
 function getLeavesNode(node) {
     let size = 0;
@@ -208,14 +207,14 @@ function getLeavesNode(node) {
     if (!node) {
         return size;
     }
-    
+
     node.left && (size += getLeavesNode(node.left));
     node.right && (size += getLeavesNode(node.right));
 
     if (!node.left && !node.right) {
         size++;
     }
-    
+
     return size;
 }
 
@@ -226,17 +225,32 @@ BSTree.prototype.reverse = function() {
 function reverseNode(node) {
     if (!node) {
         return null;
-    } 
+    }
 
     const leftNode = node.left;
 
-    node.left = node.right; 
-    node.right = leftNode; 
-   
+    node.left = node.right;
+    node.right = leftNode;
+
     node.left = reverseNode(node.left);
     node.right = reverseNode(node.right);
 
     return node;
+}
+
+BSTree.prototype.toArray = function() {
+    return toArrayNode(this._root);
+}
+
+function toArrayNode(node) {
+    if (!node) {
+        return [];
+    }
+
+    const left = toArrayNode(node.left);
+    const right = toArrayNode(node.right);
+
+    return [...left, node.value, ...right];
 }
 
 module.exports = BSTree;
