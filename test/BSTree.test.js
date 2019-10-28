@@ -289,7 +289,7 @@ describe('BSTree.getHeight', () => {
 
     it('should return height([1, 2, 0, -8, 21, 12, -5, 9])', () => {
         const arr = [1, 2, 0, -8, 21, 12, -5, 9];
-        const expected = 5;
+        const expected = 4;
         tree.init(arr);
 
         const actual = tree.getHeight();
@@ -358,7 +358,7 @@ describe('BSTree.getWidth', () => {
     it('should return Width([1, 2, 0, -8, 21, 12, -5, 9])', () => {
 
         const arr = [1, 2, 0, -8, 21, 12, -5, 9];
-        const expected = 2;
+        const expected = 4;
         tree.init(arr);
 
         const actual = tree.getWidth();
