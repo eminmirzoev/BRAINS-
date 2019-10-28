@@ -260,6 +260,28 @@ function toArrayNode(node) {
     return [...left, node.value, ...right];
 }
 
+
+BSTree.prototype.getNodes = function() {
+    return getNodesNode(this._root);
+}
+
+function getNodesNode(node) {
+    let size = 0;
+
+    if (!node) {
+        return size;
+    }
+
+    node.left && (size += getNodesNode(node.left));
+    node.right && (size += getNodesNode(node.right));
+
+    if (node.left || node.right) {
+        size++;
+    }
+
+    return size;
+}
+
 function fixCurrentHeight(node) {
     const leftHeight = node.left ? node.left.height : 0;
     const rightHeight = node.right ? node.right.height : 0;
@@ -330,6 +352,6 @@ function balanceNode(node) {
     };
 
     return node;
-}
+};
 
 module.exports = BSTree;

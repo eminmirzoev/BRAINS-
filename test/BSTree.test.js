@@ -540,3 +540,71 @@ describe('BSTree.toArray', () => {
         assert.deepEqual(actual, expected);
     });
 });
+
+describe('BSTree.getNodes', () => {
+    let tree = null;
+
+    beforeEach(() => {
+        tree = new BSTree();
+    });
+
+    it('should get nodes 0 (undefined)', () => {
+        const arr = undefined;
+        const expected = 0;
+        tree.init(arr);
+
+        const actual = tree.getNodes();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should get nodes 0  ([])', () => {
+        const arr = [];
+        const expected = 0;
+        tree.init(arr);
+
+        const actual = tree.getNodes();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should get nodes 0 ([1])', () => {
+        const arr = [1];
+        const expected = 0;
+        tree.init(arr);
+
+        const actual = tree.getNodes();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should get nodes 1  ([2, 1])', () => {
+        const arr = [2, 1];
+        const expected = 1;
+        tree.init(arr);
+
+        const actual = tree.getNodes();
+
+        assert.deepEqual(actual, expected);
+    });
+    
+    it('should return correct array ([1, 2, 0, -8, 21])', () => {
+        const arr = [1, 2, 0, -8, 21];
+        const expected = 3;
+        tree.init(arr);
+
+        const actual = tree.getNodes();
+
+        assert.deepEqual(actual, expected);
+    });
+
+    it('should return correct array ([45, 14, -9, 13, -21, 60, 75, 50])', () => {
+        const arr = [45, 14, -9, 13, -21, 60, 75, 50];
+        const expected = 4;
+        tree.init(arr);
+
+        const actual = tree.getNodes();
+
+        assert.deepEqual(actual, expected);
+    });
+});
